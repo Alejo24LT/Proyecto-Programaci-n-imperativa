@@ -209,7 +209,7 @@ def sillas_aluminio(app):
         paquetes.config(bg=recuadro_paquetes.cget('bg'))
     paquetes_vuelo()
 
-paquete_usuario = "ALUMINIO"  #Este es el paquete que el usuario escoge
+paquete_usuario = "PREMIUM"  #Este es el paquete que el usuario escoge
 def separar_usuario(paquete_usuario):
     if paquete_usuario == "PREMIUM":
         sillas_premium(app)
