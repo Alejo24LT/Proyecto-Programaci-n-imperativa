@@ -1,7 +1,9 @@
 # app.mainloop()
 #Todo lo que esta aqui es las librerias que se necesita 
 import tkinter as tk
-import time
+from tkinter import *
+from datetime import datetime
+from tkcalendar import Calendar, DateEntry
 import random
 from tkinter import Label
 from PIL import Image, ImageTk
@@ -80,9 +82,9 @@ def sillas_premium(app):                                ##Aqui guarde todas las 
             if silla_especifica in sillas_ocupadas:
                 sitios.config(bg="red")
             if j <= 3:                                          ##Separa en dos columnas las sillas
-                sitios.grid(column=i, row=j-1, padx=5, pady=5)  
+                sitios.grid(row=j-1, column= i, padx=5, pady=5)  
             else:
-                sitios.grid(column=i, row=j+1, padx=5, pady=5)  
+                sitios.grid(row=j+1, column=i, padx=5, pady=5)  
     def paquetes_vuelo():
         recuadro_paquetes = tk.Frame(app, bg='blue')                    ###El cuadro que enseña los paquetes
         recuadro_paquetes.grid(row=1, column=2, padx=5, pady=5)
@@ -209,18 +211,16 @@ def sillas_aluminio(app):
         paquetes.config(bg=recuadro_paquetes.cget('bg'))
     paquetes_vuelo()
 
-paquete_usuario = "PREMIUM"  #Este es el paquete que el usuario escoge
-def separar_usuario(paquete_usuario):
-    if paquete_usuario == "PREMIUM":
-        sillas_premium(app)
-    elif paquete_usuario == "DIAMANTE":
-        sillas_diamante(app)
-    elif paquete_usuario == "ALUMINIO":
-        sillas_aluminio(app)
+# paquete_usuario = "PREMIUM"  #Este es el paquete que el usuario escoge
+# def separar_usuario(paquete_usuario):
+#     if paquete_usuario == "PREMIUM":
+#         sillas_premium(app)
+#     elif paquete_usuario == "DIAMANTE":
+#         sillas_diamante(app)
+#     elif paquete_usuario == "ALUMINIO":
+#         sillas_aluminio(app)
 
-separar_usuario(paquete_usuario)
+# separar_usuario(paquete_usuario)
 
-app.mainloop()
+# app.mainloop()
 
-
-app.mainloop()
