@@ -5,13 +5,13 @@ import re
 
 #se crea esta funcion con la que mas adelante se va a utilizar ya que aqui se guardan datos
 def Datos_A_guardar():
-    nombres = entry_nombres.get()
-    apellidos = entry_apellidos.get()
-    genero = entry_genero.get()
-    identificacion = entry_identificacion.get()
-    nacionalidad = entry_nacionalidad.get()
-    correo = entry_correo.get()
-    telefono = entry_telefono.get()
+    nombres = entrada_nombres.get()
+    apellidos = entrada_apellidos.get()
+    genero = entrada_genero.get()
+    identificacion = entrada_identificacion.get()
+    nacionalidad = entrada_nacionalidad.get()
+    correo = entrada_correo.get()
+    telefono = entrada_telefono.get()
     
 #Condicion del correo electrónico
     if "@" not in correo or "." not in correo:
@@ -41,10 +41,10 @@ def Datos_A_guardar():
         file.write("-" * 40 + "\n")
     messagebox.showinfo("CORRECTO", "Los datos se han guardado en la base de datos")
 
-root = tk.Tk()
-root.title("Datos del usuario")
-root.geometry("800x500")
-root.configure(bg="#2c3e50")
+la_ventana = tk.Tk()
+la_ventana.title("Datos del usuario")
+la_ventana.geometry("800x500")
+la_ventana.configure(bg="#2c3e50")
 
 #Estilos personalizados aqui todos lo que aparece en las ventanas para escribir y su estetica va aqui
 style = ttk.Style()
@@ -58,34 +58,34 @@ style.map("Custom.TButton",
           foreground=[('active', '#ffffff'), ('pressed', '#1e272e')])
 
 # Para el marco 
-frame = ttk.Frame(root, padding="20", style="Custom.TFrame")
-frame.pack(fill="both", expand=True)
+ventana1 = ttk.Frame(la_ventana, padding="20", style="Custom.TFrame")
+ventana1.pack(fill="both", expand=True)
 
 #SU detalle del titulo
-label = ttk.Label(frame, text="Datos del usuario", style="Titulo.TLabel")
-label.grid(row=0, column=0, columnspan=2, pady=20)#lugar de su ubicacion  con grid
+titulodentro = ttk.Label(ventana1, text="Datos del usuario", style="Titulo.TLabel")
+titulodentro.grid(row=0, column=0, columnspan=2, pady=20)#lugar de su ubicacion  con grid
 
 #funcion para crear los campos de entrada
-def create_entry(frame, label_text, row):
-    label = ttk.Label(frame, text=label_text, style="Custom.TLabel")
-    label.grid(row=row, column=0, pady=5, sticky=tk.W)
-    entry = ttk.Entry(frame, style="Custom.TEntry")
-    entry.grid(row=row, column=1, pady=5, padx=10, sticky=tk.EW)
-    return entry
-entry_nombres = create_entry(frame, "Nombres Completos:", 1)
-entry_apellidos = create_entry(frame, "Apellidos Completos:", 2)
-entry_genero = create_entry(frame, "Género (Masculino/Femenino/Otro):", 3)
-entry_identificacion = create_entry(frame, "Número de Identificación:", 4)
-entry_nacionalidad = create_entry(frame, "Nacionalidad:", 5)
-entry_correo = create_entry(frame, "Correo Electrónico:", 6)
-entry_telefono = create_entry(frame, "Número de Teléfono:", 7)
+def datos_que_entran(ventana1, label_text, row):
+    datos = ttk.Label(ventana1, text=label_text, style="Custom.TLabel")
+    datos.grid(row=row, column=0, pady=5, sticky=tk.W)
+    entradas = ttk.Entry(ventana1, style="Custom.TEntry")
+    entradas.grid(row=row, column=1, pady=5, padx=10, sticky=tk.EW)
+    return entradas
+entrada_nombres = datos_que_entran(ventana1, "Nombres Completos:", 1)
+entrada_apellidos = datos_que_entran(ventana1, "Apellidos Completos:", 2)
+entrada_genero = datos_que_entran(ventana1, "Género (Masculino/Femenino/Otro):", 3)
+entrada_identificacion = datos_que_entran(ventana1, "Número de Identificación:", 4)
+entrada_nacionalidad = datos_que_entran(ventana1, "Nacionalidad:", 5)
+entrada_correo = datos_que_entran(ventana1, "Correo Electrónico:", 6)
+entrada_telefono = datos_que_entran(ventana1, "Número de Teléfono:", 7)
 
 #boton para cargar datos a la funcion datos_A_guardar
-update_button = ttk.Button(frame, text="Registrar Datos", style="Custom.TButton", command=Datos_A_guardar)
-update_button.grid(row=8, column=0, columnspan=2, pady=20)
+boton = ttk.Button(ventana1, text="Registrar Datos", style="Custom.TButton", command=Datos_A_guardar)
+boton.grid(row=8, column=0, columnspan=2, pady=20)
 
 # con esta parte nos permite extender la parte del codigo
-frame.columnconfigure(0, weight=1)
-frame.columnconfigure(1, weight=2)
+ventana1.columnconfigure(0, weight=1)
+ventana1.columnconfigure(1, weight=2)
 
-root.mainloop()#Imprimimos para mostrar en ventana
+la_ventana.mainloop()#Imprimimos para mostrar en ventana
