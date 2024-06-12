@@ -6,7 +6,7 @@ import csv
 import calendar 
 from datetime import datetime
 from tkcalendar import Calendar
-from Busqueda 
+from . import busqueda_posicion
 
 # ################
 # # with open('DatosVuelos.txt', 'r') as file:
@@ -95,7 +95,7 @@ def fecha_viaje():
     mota.grid(row=10, column=2, padx=10, pady=10)
     def prueba():
         pass
-    siguiente_boton = tk.Button(recuadro_datos, text="Siguiente", relief="flat", command=prueba)
+    siguiente_boton = tk.Button(recuadro_datos, text="Siguiente", relief="flat", command=busqueda_posicion)
     siguiente_boton.grid(row=10, column=4, padx=10, pady=10)
     # verificacion()
     
