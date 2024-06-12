@@ -1,5 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
+import recolector
+
+
+def prueba():
+    recolector.solicitud_datos()
+#     sd()
+
+
 
 def verifica_datos_existentes():
     nombre = entradausuario.get()
@@ -58,7 +66,7 @@ entradacodigo.pack(pady=5)
 boton_login = tk.Button(ventanita, text="Cargar",command=verifica_datos_existentes,bg="beige",font=("Comic Sans MS", 13, "bold"), fg="#1e272e")
 boton_login.place(x=250, y=250, width=100, height=40)
 #Boton para solicitar el check-in aqui es que nos toca poner el nombre de la funcion del otro codigo 
-boton_de_entrada_proceso = tk.Button(ventanita,text="Solicitar Check-in", command=solicitar_check_in, bg="beige", fg="#1e272e", font=("Comic Sans MS", 10, "bold"))
+boton_de_entrada_proceso = tk.Button(ventanita,text="Solicitar Check-in", command=prueba, bg="beige", fg="#1e272e", font=("Comic Sans MS", 10, "bold"))
 boton_de_entrada_proceso.place(x=240, y=300, width=120, height=40)
 #ejecuta la ventana
 ventanita.mainloop()
