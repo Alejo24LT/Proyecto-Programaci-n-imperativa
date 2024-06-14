@@ -164,6 +164,7 @@ silla_seleccionada = None
 silla_azar1 = None
 user = "premium"                        ####SILLAS Y VUELOS   ###
 def todo_sillas(codigo_avion, user):
+    global ventana_sillas
     ventana_sillas = tk.Toplevel()
     ventana_sillas.title("Seleccion de sillas")         ##ESTA FUNCION RECIBE EL CODIGO DEL VUELO POR POSICION
     ventana_sillas.geometry("650x600")                     ##Y EL TIPO DEL USUARIO
@@ -406,6 +407,9 @@ def abrir_ventana():
 def precios_paquetes():
     pass
 
+def boton_tiquete(tiquete):
+    boton_boleto = tk.Button(ventana_sillas, text="Generar Boleto", command=tiquete)
+    boton_boleto.grid(column=2, row=2, padx=5, pady=5)
 
 
 
