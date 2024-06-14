@@ -387,17 +387,19 @@ def seleccionar_vuelo(vuelo):
     seleccionar_vuelo_completo(vuelo)
 
     
-    import tkinter as tk
+   # Inicializar tkinter solo una vez
+root = tk.Tk()
+root.withdraw()  # Ocultar la ventana principal
 
+# Variables globales (si es necesario)
 def mostrar_interfaz_opciones():
-    
     # Definir los costos
     costo_aluminio = 100  # Define el costo real
     costo_diamante = 200  # Define el costo real
     coste_premium = 300  # Define el costo real
 
     # Crear ventana para opciones de vuelo
-    vent_clas = tk.Tk()
+    vent_clas = tk.Toplevel(root)
     vent_clas.title("Bluesky Airlines - Selección de Clase")
     vent_clas.geometry("1300x600")
     vent_clas.resizable(0, 0)
@@ -460,13 +462,16 @@ def mostrar_interfaz_opciones():
 
     # Funciones específicas para cada costo
     def select_alum(costo):
-        user = "aluminio"
+        user1 = "aluminio"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user1} seleccionada con costo {costo} COP")
 
     def select_diamant(costo):
-        user = "diamante"
+        user2 = "diamante"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user2} seleccionada con costo {costo} COP")
 
     def select_premi(costo):
-        user = "premium"
+        user3 = "premium"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user3} seleccionada con costo {costo} COP")
 
     # Opciones de vuelo
     opcion_alum(opciones_frame, "Aluminio", 
@@ -493,23 +498,29 @@ def mostrar_interfaz_opciones():
         "Cambios de vuelo (Sin cargo por cambio, antes del vuelo)\n"
         "Reembolso (No es permitido)", coste_premium)
 
-    vent_clas.mainloop()
-
-# Llamar a la función para mostrar la interfaz
-mostrar_interfaz_opciones()
-
-
 def vuelos_disponibles():
     global vuelos_encontrados
+    recuadro_busqueda = tk.Toplevel(root)
+    recuadro_busqueda.title("Vuelos Disponibles")
+    recuadro_busqueda.geometry("800x600")
+
     seleccionar_vuelo_label = tk.Label(recuadro_busqueda, text="Seleccione un vuelo: ")
     seleccionar_vuelo_label.grid(row=0, column=0, padx=10, pady=10)
-                                        ##ESTE ME HACE LOS BOTONES POR CADA VUELO
+    
     if vuelos_encontrados:
         for i, vuelo in enumerate(vuelos_encontrados):
-            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat", command=mostrar_interfaz_opciones, highlightbackground="light blue", highlightthickness=2)
-            vuelo_seleccionado.grid(row=i+1, column=1, padx=10, pady=10)
+            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat",  highlightbackground="light blue", highlightthickness=2)
+            vuelo_seleccionado.grid(row=i+1, column=0, padx=10, pady=10)
+            buton_nv = tk.Button(recuadro_busqueda, text="Seleccionar", command=mostrar_interfaz_opciones)
+            buton_nv.grid(row=i+1, column=1, padx=10, pady=10)
     else:
         messagebox.showinfo("DISCULPA","No se encontraron vuelos.")
+
+# Ejemplo de cómo llamar a vuelos_disponibles (esto sería parte de otra función en tu programa)
+vuelos_disponibles()
+
+# Iniciar el loop principal
+root.mainloop()
 
 def seleccionar_vuelo_completo(vuelo):
     print(vuelo)                    ##SIMPLE GUIA NO HACE NADA
