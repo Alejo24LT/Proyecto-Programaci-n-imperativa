@@ -7,8 +7,6 @@ from datetime import datetime
 import random
 ###
 
-
-
 vuelo_ventana_principal = tk.Toplevel()
 vuelo_ventana_principal.title("Vuelos")
 vuelo_ventana_principal.geometry("500x700")
@@ -364,42 +362,54 @@ def todo_sillas(codigo_avion, user):
             paquetes.grid()
             paquetes.config(bg=recuadro_paquetes.cget('bg'))
         paquetes_vuelo()
-    if user == "premium":
-        sillas_premium(ventana_sillas, codigo_avion)
-    elif user == "diamante":
-        sillas_diamante(ventana_sillas, codigo_avion)
-    elif user == "aluminio":
-        sillas_aluminio(ventana_sillas, codigo_avion)
+        if user == 1 :
+            sillas_premium(ventana_sillas, codigo_avion)
+        elif user == 2:
+            sillas_diamante(ventana_sillas, codigo_avion)
+        elif user == 3 :
+            sillas_aluminio(ventana_sillas, codigo_avion)
+            
     ventana_sillas.mainloop()
+
     
 
 def seleccionar_vuelo(vuelo):
-    global costo_aluminio, costo_diamante, coste_premium
+    global costo_aluminio, costo_diamante, costo_premium
     codigo_avion = vuelo[0]
     fecha = vuelo[1]
     hora_salida = vuelo[2]              ##DA LOS VALORES DEL VUEJO QUE SE ESCOJA
     hora_llegada = vuelo[3]
     costo_aluminio = vuelo[4]
     costo_diamante = vuelo[5]
-    coste_premium = vuelo[6]
+    costo_premium = vuelo[6]
     todo_sillas(codigo_avion, user)
 
     seleccionar_vuelo_completo(vuelo)
 
-    
-   # Inicializar tkinter solo una vez
-root = tk.Tk()
-root.withdraw()  # Ocultar la ventana principal
+
+import tkinter as tk
+from tkinter import messagebox
+
+# Inicializar tkinter solo una vez
+crv = tk.Tk()
+crv.withdraw()  # Ocultar la ventana principal
 
 # Variables globales (si es necesario)
-def mostrar_interfaz_opciones():
+vuelos_encontrados = [("Vuelo 1", "2023-06-14", "10:00", "12:00")]
+
+def todo_sillas(vent_clas, clase):
+    # Aquí llamas a tu función todo_sillas que ya está elaborada
+    # Supongamos que ya tienes la función implementada aquí
+    pass
+
+def opcion_int():
     # Definir los costos
     costo_aluminio = 100  # Define el costo real
     costo_diamante = 200  # Define el costo real
     coste_premium = 300  # Define el costo real
 
     # Crear ventana para opciones de vuelo
-    vent_clas = tk.Toplevel(root)
+    vent_clas = tk.Toplevel(crv)
     vent_clas.title("Bluesky Airlines - Selección de Clase")
     vent_clas.geometry("1300x600")
     vent_clas.resizable(0, 0)
@@ -425,7 +435,7 @@ def mostrar_interfaz_opciones():
         cost_al = tk.Label(opcion1, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_al.pack(pady=5)
 
-        slect_m = tk.Button(opcion1, text="Seleccionar", command=lambda: select_alum(costo))
+        slect_m = tk.Button(opcion1, text="Seleccionar", command=lambda: todo_sillas(vent_clas, "Aluminio"))
         slect_m.pack(pady=5)
 
     def opcion_diamant(frame, titulo, descripcion, costo):
@@ -441,7 +451,7 @@ def mostrar_interfaz_opciones():
         cost_diam = tk.Label(opcion_2, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_diam.pack(pady=5)
 
-        selec_ant = tk.Button(opcion_2, text="Seleccionar", command=lambda: select_diamant(costo))
+        selec_ant = tk.Button(opcion_2, text="Seleccionar", command=lambda: todo_sillas(vent_clas, "Diamante"))
         selec_ant.pack(pady=5)
 
     def opcion_premi(frame, titulo, descripcion, costo):
@@ -457,21 +467,21 @@ def mostrar_interfaz_opciones():
         cost_mium = tk.Label(opcion3, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_mium.pack(pady=5)
 
-        select_pmu = tk.Button(opcion3, text="Seleccionar", command=lambda: select_premi(costo))
+        select_pmu = tk.Button(opcion3, text="Seleccionar", command=lambda: todo_sillas(vent_clas, "Premium"))
         select_pmu.pack(pady=5)
 
     # Funciones específicas para cada costo
     def select_alum(costo):
-        user1 = "aluminio"
-        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user1} seleccionada con costo {costo} COP")
+        user = "aluminio"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user} seleccionada con costo {costo} COP")
 
     def select_diamant(costo):
-        user2 = "diamante"
-        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user2} seleccionada con costo {costo} COP")
+        user = "diamante"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user} seleccionada con costo {costo} COP")
 
     def select_premi(costo):
-        user3 = "premium"
-        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user3} seleccionada con costo {costo} COP")
+        user = "premium"
+        messagebox.showinfo("Seleccionado", f"Clase de vuelo {user} seleccionada con costo {costo} COP")
 
     # Opciones de vuelo
     opcion_alum(opciones_frame, "Aluminio", 
@@ -498,20 +508,15 @@ def mostrar_interfaz_opciones():
         "Cambios de vuelo (Sin cargo por cambio, antes del vuelo)\n"
         "Reembolso (No es permitido)", coste_premium)
 
-def vuelos_disponibles():
-    global vuelos_encontrados
-    recuadro_busqueda = tk.Toplevel(root)
-    recuadro_busqueda.title("Vuelos Disponibles")
-    recuadro_busqueda.geometry("800x600")
+    # Devolver la ventana de opciones de vuelo para que sea manipulable desde fuera
+    return vent_clas
 
-    seleccionar_vuelo_label = tk.Label(recuadro_busqueda, text="Seleccione un vuelo: ")
-    seleccionar_vuelo_label.grid(row=0, column=0, padx=10, pady=10)
-    
+def vuelos_disponibles():
     if vuelos_encontrados:
         for i, vuelo in enumerate(vuelos_encontrados):
-            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat",  highlightbackground="light blue", highlightthickness=2)
+            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat", highlightbackground="light blue", highlightthickness=2)
             vuelo_seleccionado.grid(row=i+1, column=0, padx=10, pady=10)
-            buton_nv = tk.Button(recuadro_busqueda, text="Seleccionar", command=mostrar_interfaz_opciones)
+            buton_nv = tk.Button(recuadro_busqueda, text="Seleccionar", command=lambda: todo_sillas(opcion_int(), ""))
             buton_nv.grid(row=i+1, column=1, padx=10, pady=10)
     else:
         messagebox.showinfo("DISCULPA","No se encontraron vuelos.")
@@ -520,7 +525,10 @@ def vuelos_disponibles():
 vuelos_disponibles()
 
 # Iniciar el loop principal
-root.mainloop()
+crv.mainloop()
+
+
+
 
 def seleccionar_vuelo_completo(vuelo):
     print(vuelo)                    ##SIMPLE GUIA NO HACE NADA
@@ -537,12 +545,6 @@ def precios_paquetes():
 def boton_tiquete(tiquete):
     boton_boleto = tk.Button(ventana_sillas, text="Generar Boleto", command=tiquete)
     boton_boleto.grid(column=2, row=2, padx=5, pady=5)
-
-
-
-
-
-# Función para avanzar a la siguiente interfaz
 
 
 
