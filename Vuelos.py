@@ -9,6 +9,8 @@ from datetime import datetime
 import random
 ###
 
+
+
 vuelo_ventana_principal = tk.Toplevel()
 vuelo_ventana_principal.title("Vuelos")
 vuelo_ventana_principal.geometry("500x700")
@@ -17,6 +19,7 @@ vuelo_ventana_principal.resizable(0, 0)
 recuadro_datos = tk.Frame(vuelo_ventana_principal, bg="light yellow", width=480, height=320)
 recuadro_datos.grid(row=0, column=0, padx=10, pady=10)
 recuadro_datos.grid_propagate(False)
+
 
 
 def origen():
@@ -373,15 +376,145 @@ def todo_sillas(codigo_avion, user):
     
 
 def seleccionar_vuelo(vuelo):
+    global costo_aluminio, costo_diamante, coste_premium
     codigo_avion = vuelo[0]
     fecha = vuelo[1]
     hora_salida = vuelo[2]              ##DA LOS VALORES DEL VUEJO QUE SE ESCOJA
     hora_llegada = vuelo[3]
     costo_aluminio = vuelo[4]
-    cosoto_diamante = vuelo[5]
+    costo_diamante = vuelo[5]
     coste_premium = vuelo[6]
     todo_sillas(codigo_avion, user)
+
     seleccionar_vuelo_completo(vuelo)
+
+    
+    
+#  def nueva_inter2(ventana_actual, clase):
+    # ventana_actual.destroy()
+    # Aquí puedes agregar el código para abrir la interfaz siguiente que ya tienes creada.
+    # Por ejemplo, si se llama `siguiente_interfaz.py`:
+    # from siguiente_interfaz import siguiente_interfaz
+    # siguiente_interfaz(clase, costo)
+
+    # Ejemplo de abrir una nueva ventana con la selección
+    # nueva_ventana = tk.Toplevel(ventana_actual)
+    # nueva_ventana.title("Confirmación de Selección")
+    # nueva_ventana.geometry("400x200")
+
+    # confirmacion_label = tk.Label(nueva_ventana, text=f"Clase seleccionada: {clase}\nCosto: {costo} COP", font=("Arial", 12))
+    # confirmacion_label.pack(pady=20)
+
+    # nueva_ventana.mainloop()
+
+# Función para mostrar la interfaz de opciones de vuelo
+def mostrar_interfaz_opciones():
+    
+    # Crear ventana para opciones de vuelo
+    vent_clas = tk.Tk()
+    vent_clas.title("Bluesky Airlines - Selección de Clase")
+    vent_clas.geometry("1300x600")
+    vent_clas.resizable(0, 0)
+
+    # Etiqueta de título
+    title = tk.Label(vent_clas, text="Selección de Clase de Vuelo", font=("Arial", 18, "bold"), fg="green")
+    title.pack(pady=10)
+
+    # Opciones de selección
+    opciones_frame = tk.Frame(vent_clas)
+    opciones_frame.pack(pady=10, padx=20, fill="both", expand=True)
+
+    def opcion_alum(frame, titulo, descripcion, costo):
+        opcion1 = tk.Frame(frame, bd=2, relief="ridge")
+        opcion1.pack(side="left", padx=10, pady=10, fill="both", expand=True)
+
+        titulo_lab = tk.Label(opcion1, text=titulo, font=("Arial", 12, "bold"))
+        titulo_lab.pack(pady=5)
+
+        descipto_a = tk.Label(opcion1, text=descripcion, font=("Arial", 10), justify="left")
+        descipto_a.pack(pady=5)
+        
+        cost_al = tk.Label(opcion1, text=f"Costo Total: {costo_aluminio} COP", font=("Arial", 10, "bold"))
+        cost_al.pack(pady=5)
+
+        slect_m = tk.Button(opcion1, text="Seleccionar", command=lambda: select_alum(costo))
+        slect_m.pack(pady=5)
+
+    def opcion_diamant(frame, titulo, descripcion, costo):
+        opcion_2 = tk.Frame(frame, bd=2, relief="ridge")
+        opcion_2.pack(side="left", padx=10, pady=10, fill="both", expand=True)
+
+        tit_d = tk.Label(opcion_2, text=titulo, font=("Arial", 12, "bold"))
+        tit_d.pack(pady=5)
+
+        describ_dia = tk.Label(opcion_2, text=descripcion, font=("Arial", 10), justify="left")
+        describ_dia.pack(pady=5)
+        
+        cost_diam = tk.Label(opcion_2, text=f"Costo Total: {costo_diamante} COP", font=("Arial", 10, "bold"))
+        cost_diam.pack(pady=5)
+
+        selec_ant = tk.Button(opcion_2, text="Seleccionar", command=lambda: select_diamant(costo))
+        selec_ant.pack(pady=5)
+
+    def opcion_premi(frame, titulo, descripcion, costo):
+        opcion3 = tk.Frame(frame, bd=2, relief="ridge")
+        opcion3.pack(side="left", padx=10, pady=10, fill="both", expand=True)
+
+        tiltre = tk.Label(opcion3, text=titulo, font=("Arial", 12, "bold"))
+        tiltre.pack(pady=5)
+
+        desc_pre = tk.Label(opcion3, text=descripcion, font=("Arial", 10), justify="left")
+        desc_pre.pack(pady=5)
+        
+        cost_mium = tk.Label(opcion3, text=f"Costo Total: {coste_premium} COP", font=("Arial", 10, "bold"))
+        cost_mium.pack(pady=5)
+
+        select_pmu = tk.Button(opcion3, text="Seleccionar", command=lambda: select_premi(costo))
+        select_pmu.pack(pady=5)
+
+    # Funciones específicas para cada costo
+    def select_alum(costo):
+        user = "aluminio"
+
+    def select_diamant(costo):
+        user = "diamante"
+
+    def select_premi(costo):
+        user = "premium"
+
+    # Opciones de vuelo
+    opcion_alum(opciones_frame, "Aluminio", 
+        "1 artículo personal (bolso) (Debe caber debajo del asiento)\n"
+        "1 equipaje de mano (10 kg)\n"
+        "Equipaje de bodega (23 kg)\n"
+        "Asiento Economy (Aleatoria - clasificado Aluminio)\n"
+        "Cambios de vuelo (No es permitido)\n"
+        "Reembolso (No es permitido)", costo_aluminio)
+
+    opcion_diamant(opciones_frame, "Diamante", 
+        "1 artículo personal (bolso) (Debe caber debajo del asiento)\n"
+        "1 equipaje de bodega (23 kg) (Debe caber en el compartimiento superior)\n"
+        "1 equipaje de mano (10 kg) (Entrega el equipaje en el counter)\n"
+        "Asiento Economy (Filas específicas disponibles de manera aleatoria)\n"
+        "Cambios de vuelo (No es permitido)\n"
+        "Reembolso (No es permitido)", costo_diamante)
+
+    opcion_premi(opciones_frame, "Premium", 
+        "1 artículo personal (bolso) (Debe caber debajo del asiento)\n"
+        "1 equipaje de mano (10 kg) (Debe caber en el compartimiento superior)\n"
+        "1 equipaje de bodega (23 kg) (Entrega el equipaje en el counter)\n"
+        "Asiento Plus (Sujeto a disponibilidad - clasificado Premium)\n"
+        "Cambios de vuelo (Sin cargo por cambio, antes del vuelo)\n"
+        "Reembolso (No es permitido)", coste_premium)
+
+    vent_clas.mainloop()
+
+   
+    
+    
+    
+    
+
     
 def vuelos_disponibles():
     global vuelos_encontrados
@@ -390,7 +523,7 @@ def vuelos_disponibles():
                                         ##ESTE ME HACE LOS BOTONES POR CADA VUELO
     if vuelos_encontrados:
         for i, vuelo in enumerate(vuelos_encontrados):
-            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat", command=lambda vuelo=vuelo: seleccionar_vuelo(vuelo), highlightbackground="light blue", highlightthickness=2)
+            vuelo_seleccionado = tk.Button(recuadro_busqueda, text=f"Vuelo encontrado: {vuelo[0]} Hora Salida: {vuelo[2]}\nHora Llegada: {vuelo[3]} Fecha: {vuelo[1]}", relief="flat", command=mostrar_interfaz_opciones, highlightbackground="light blue", highlightthickness=2)
             vuelo_seleccionado.grid(row=i+1, column=1, padx=10, pady=10)
     else:
         messagebox.showinfo("DISCULPA","No se encontraron vuelos.")
@@ -411,6 +544,11 @@ def boton_tiquete(tiquete):
     boton_boleto = tk.Button(ventana_sillas, text="Generar Boleto", command=tiquete)
     boton_boleto.grid(column=2, row=2, padx=5, pady=5)
 
+
+
+
+
+# Función para avanzar a la siguiente interfaz
 
 
 
