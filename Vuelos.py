@@ -387,12 +387,11 @@ def seleccionar_vuelo(vuelo):
     seleccionar_vuelo_completo(vuelo)
 
 
-import tkinter as tk
-from tkinter import messagebox
 
-# Inicializar tkinter solo una vez
+
+# Inicializar tkinter solo una vez no se  quedaria abierta 
 crv = tk.Tk()
-crv.withdraw()  # Ocultar la ventana principal
+crv.withdraw()  # cerrar la ventana principal
 
 # Variables globales (si es necesario)
 vuelos_encontrados = [("Vuelo 1", "2023-06-14", "10:00", "12:00")]
@@ -408,21 +407,21 @@ def opcion_int():
     costo_diamante = 200  # Define el costo real
     coste_premium = 300  # Define el costo real
 
-    # Crear ventana para opciones de vuelo
+    # Crear ventana para las opciones (clases "categorias") vuelo
     vent_clas = tk.Toplevel(crv)
     vent_clas.title("Bluesky Airlines - Selección de Clase")
     vent_clas.geometry("1300x600")
     vent_clas.resizable(0, 0)
 
-    # Etiqueta de título
+    # Aqui se mostraria como tal el título
     title = tk.Label(vent_clas, text="Selección de Clase de Vuelo", font=("Arial", 18, "bold"), fg="green")
     title.pack(pady=10)
 
-    # Opciones de selección
+    #opcines para elegir
     opciones_frame = tk.Frame(vent_clas)
     opciones_frame.pack(pady=10, padx=20, fill="both", expand=True)
 
-    def opcion_alum(frame, titulo, descripcion, costo):
+    def opcion_alum(frame, titulo, descripcion, costo):   # cada funcion esta asi por que se necesitaba que cuando se undiera el boton le diera un resultado diferente
         opcion1 = tk.Frame(frame, bd=2, relief="ridge")
         opcion1.pack(side="left", padx=10, pady=10, fill="both", expand=True)
 
@@ -483,7 +482,7 @@ def opcion_int():
         user = "premium"
         messagebox.showinfo("Seleccionado", f"Clase de vuelo {user} seleccionada con costo {costo} COP")
 
-    # Opciones de vuelo
+    # Opciones de vuelo las cuales se mostrarian en diferenetes recuadros
     opcion_alum(opciones_frame, "Aluminio", 
         "1 artículo personal (bolso) (Debe caber debajo del asiento)\n"
         "1 equipaje de mano (10 kg)\n"
@@ -521,10 +520,10 @@ def vuelos_disponibles():
     else:
         messagebox.showinfo("DISCULPA","No se encontraron vuelos.")
 
-# Ejemplo de cómo llamar a vuelos_disponibles (esto sería parte de otra función en tu programa)
+
 vuelos_disponibles()
 
-# Iniciar el loop principal
+# Iniciar el como tal la ventana principal
 crv.mainloop()
 
 
