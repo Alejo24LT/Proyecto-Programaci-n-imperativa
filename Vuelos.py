@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 import re
-import tkinter as tk
-from tkinter import messagebox
 from tkinter import *
 import ast
 from datetime import datetime
@@ -389,27 +387,15 @@ def seleccionar_vuelo(vuelo):
     seleccionar_vuelo_completo(vuelo)
 
     
-    
-#  def nueva_inter2(ventana_actual, clase):
-    # ventana_actual.destroy()
-    # Aquí puedes agregar el código para abrir la interfaz siguiente que ya tienes creada.
-    # Por ejemplo, si se llama `siguiente_interfaz.py`:
-    # from siguiente_interfaz import siguiente_interfaz
-    # siguiente_interfaz(clase, costo)
+    import tkinter as tk
 
-    # Ejemplo de abrir una nueva ventana con la selección
-    # nueva_ventana = tk.Toplevel(ventana_actual)
-    # nueva_ventana.title("Confirmación de Selección")
-    # nueva_ventana.geometry("400x200")
-
-    # confirmacion_label = tk.Label(nueva_ventana, text=f"Clase seleccionada: {clase}\nCosto: {costo} COP", font=("Arial", 12))
-    # confirmacion_label.pack(pady=20)
-
-    # nueva_ventana.mainloop()
-
-# Función para mostrar la interfaz de opciones de vuelo
 def mostrar_interfaz_opciones():
     
+    # Definir los costos
+    costo_aluminio = 100  # Define el costo real
+    costo_diamante = 200  # Define el costo real
+    coste_premium = 300  # Define el costo real
+
     # Crear ventana para opciones de vuelo
     vent_clas = tk.Tk()
     vent_clas.title("Bluesky Airlines - Selección de Clase")
@@ -434,7 +420,7 @@ def mostrar_interfaz_opciones():
         descipto_a = tk.Label(opcion1, text=descripcion, font=("Arial", 10), justify="left")
         descipto_a.pack(pady=5)
         
-        cost_al = tk.Label(opcion1, text=f"Costo Total: {costo_aluminio} COP", font=("Arial", 10, "bold"))
+        cost_al = tk.Label(opcion1, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_al.pack(pady=5)
 
         slect_m = tk.Button(opcion1, text="Seleccionar", command=lambda: select_alum(costo))
@@ -450,7 +436,7 @@ def mostrar_interfaz_opciones():
         describ_dia = tk.Label(opcion_2, text=descripcion, font=("Arial", 10), justify="left")
         describ_dia.pack(pady=5)
         
-        cost_diam = tk.Label(opcion_2, text=f"Costo Total: {costo_diamante} COP", font=("Arial", 10, "bold"))
+        cost_diam = tk.Label(opcion_2, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_diam.pack(pady=5)
 
         selec_ant = tk.Button(opcion_2, text="Seleccionar", command=lambda: select_diamant(costo))
@@ -466,7 +452,7 @@ def mostrar_interfaz_opciones():
         desc_pre = tk.Label(opcion3, text=descripcion, font=("Arial", 10), justify="left")
         desc_pre.pack(pady=5)
         
-        cost_mium = tk.Label(opcion3, text=f"Costo Total: {coste_premium} COP", font=("Arial", 10, "bold"))
+        cost_mium = tk.Label(opcion3, text=f"Costo Total: {costo} COP", font=("Arial", 10, "bold"))
         cost_mium.pack(pady=5)
 
         select_pmu = tk.Button(opcion3, text="Seleccionar", command=lambda: select_premi(costo))
@@ -509,13 +495,10 @@ def mostrar_interfaz_opciones():
 
     vent_clas.mainloop()
 
-   
-    
-    
-    
-    
+# Llamar a la función para mostrar la interfaz
+mostrar_interfaz_opciones()
 
-    
+
 def vuelos_disponibles():
     global vuelos_encontrados
     seleccionar_vuelo_label = tk.Label(recuadro_busqueda, text="Seleccione un vuelo: ")
